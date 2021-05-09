@@ -1,0 +1,512 @@
+@font-face 
+    font-family: 'Neon 80s'
+    src: url('../font/Neon80s.woff2') format('woff2'), url('../font/Neon80s.woff') format('woff'), url('../font/Neon80s.ttf') format('truetype')
+    font-weight: normal
+    font-style: normal
+    font-display: swap
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+body
+    background: linear-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%))
+    font-family: 'Neon 80s'
+    letter-spacing: 1px
+
+.game
+    .main-animation
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 100
+        width: 100%
+        height: 100%
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: column
+        background: white
+        opacity: 1
+        transition: 1s cubic-bezier(1,0,0,1) all
+        h1
+            font-size: 2rem
+            font-weight: bold
+            color: hsl(229, 25%, 31%)
+            margin-bottom: 60px
+            animation: hide 1.5s alternate
+        .loader
+            display: flex
+            align-items: center
+            justify-content: center
+            animation: hide2 2.5s alternate
+            h2
+                display: inline-block
+                font-size: 1.5rem
+                font-weight: bold
+                color: hsl(229, 25%, 31%)
+            span
+                display: inline-block
+                width: 12px
+                height: 12px
+                margin: 0 10px
+                border-radius: 50%
+                background: hsl(229, 25%, 31%)
+            span:nth-child(1)
+                animation: showLeft 1s alternate, bounce .6s 2s alternate infinite
+            span:nth-child(2)
+                animation: showLeft 1.5s alternate, bounce 1s 2s alternate infinite
+            span:nth-child(3)
+                animation: showLeft 2s alternate, bounce .6s 2s alternate infinite
+    .remove
+        animation: hide3 1s 3s alternate both
+        h1
+            animation: hide2 1s alternate-reverse both
+        h2
+            animation: hide2 1s .5s alternate-reverse both
+        span
+            animation: hide2 1.5s .8s alternate-reverse both
+
+    .container
+        padding: 15px 10px
+        height: 100vh
+        min-height: 760px
+        position: relative
+        display: flex
+        justify-content: space-between
+        align-items: center
+        flex-direction: column
+        overflow: hidden
+        .score-box
+            display: block
+            width: 90%
+            max-width: 400px
+            margin: 15px auto
+            display: flex
+            align-items: center
+            justify-content: space-between
+            border: 3px solid hsl(217, 16%, 45%)
+            border-radius: 12px
+            padding: 10px 15px
+            h1
+                font-size: 1.5rem
+                line-height: 30px
+                text-transform: uppercase
+                color: white
+            .score
+                display: block
+                background: white
+                border-radius: 12px
+                text-align: center
+                padding: 15px 20px
+                p
+                    font-size: 1rem
+                    font-weight: bold
+                    color: hsl(229, 64%, 46%)
+                span
+                    display: block
+                    margin-top: 10px
+                    font-size: 2rem
+                    font-weight: bold
+                    color: hsl(229, 25%, 31%)
+        .game-items
+            position: relative   
+            width: 100%
+            max-width: 400px
+            display: flex
+            align-items: center
+            justify-content: center   
+            .base
+                display: block
+                object-fit: cover
+                margin: auto
+            .box
+                width: 120px
+                height: 120px
+                position: absolute
+                padding: 15px
+                background: white
+                border-radius: 50%
+                cursor: pointer
+                .item
+                    display: block
+                    width: 100%
+                    height: 100%
+                    object-fit: contain
+                    background: white
+                    padding: 20px
+                    border-radius: 50%
+                    pointer-events: none
+            .paper
+                top: -30px
+                left: -5px
+                background: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%))
+            .rock
+                top: -30px
+                right: -5px
+                background: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%))
+            .sciss
+                bottom: -30px
+                left: 50%
+                transform: translate(-50% ,0)
+                background: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%))
+        .game-items.active
+            animation: showLeft 1s alternate-reverse both
+
+        .game-start
+            width: 100%
+            z-index: -1
+            max-width: 400px
+            display: none
+            align-items: center
+            justify-content: space-between
+            opacity: 0
+            transition: 1s cubic-bezier(1,0,0,1) all
+            .selected-item
+                display: flex
+                flex-direction: column
+                text-align: center
+                margin: 20px
+                .pick
+                    position: relative
+                    width: 100px
+                    height: 100px
+                    margin: auto
+                    background: rgba(0,0,0,0.6)
+                    border-radius: 50%
+                    transition: .6s ease all
+                .box
+                    position: absolute
+                    display: block
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                    padding: 15px
+                    background: white
+                    border-radius: 50%
+                    transform: scale(1.2)
+                    opacity: 0
+                    transition: .6s ease all
+                    img
+                        display: block
+                        width: 100%
+                        height: 100%
+                        object-fit: contain
+                        background: white
+                        padding: 20px
+                        border-radius: 50%
+                        pointer-events: none
+                .paper
+                    background: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%))
+                .rock
+                    background: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%))
+                .sciss
+                    background: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%))
+                .box.show
+                    opacity: 1
+                .winner.pick
+                    &::before
+                        position: absolute
+                        content: ''
+                        top: -30px
+                        left: -30px
+                        width: 160px
+                        height: 160px
+                        background: #ffffff25
+                        border-radius: 50%
+                        animation: scale 2s .5s alternate infinite
+                    &::after
+                        position: absolute
+                        content: ''
+                        z-index: -1
+                        top: -50px
+                        left: -50px
+                        width: 200px
+                        height: 200px
+                        background: #ffffff13
+                        border-radius: 50%
+                        animation: scale 2s alternate infinite
+                p
+                    display: block
+                    font-size: .8rem
+                    font-weight: bold
+                    color: white
+                    text-align: center
+                    text-transform: uppercase
+                    letter-spacing: 2px
+                    margin-top: 50px
+        .game-start.active
+            display: flex
+            animation: showLeft 1s 1s alternate both
+            z-index: 100
+            opacity: 1
+
+        .game-hints
+            text-align: center
+            opacity: 0
+            display: none
+            transition: 1s cubic-bezier(1,0,0,1) all
+            animation: showHint 1s alternate both
+            .hint
+                font-size: 2rem
+                text-transform: uppercase
+                color: white
+            .btn
+                display: block
+                font-size: 1rem
+                padding: 15px 40px
+                color: white
+                margin-top: 10px
+                text-transform: uppercase
+                border-radius: 12px
+                background: white
+                transition: .6s ease all
+                cursor: pointer
+                color: hsl(229, 25%, 31%)
+                transition: .6s ease all
+                &:hover
+                    transform: translateY(10px)
+        .game-hints.active
+            display: block
+            opacity: 1
+            animation: showHint 1s alternate both
+
+        .contain-btn-rules
+            .btn-rules
+                display: block
+                font-size: 1rem
+                padding: 15px 40px
+                color: white
+                border-radius: 12px
+                border: 3px solid hsl(217, 16%, 45%)
+                transition: .6s ease all
+                cursor: pointer
+                &:hover
+                    background: white
+                    border: 3px solid white
+                    color: hsl(229, 64%, 46%)
+        .rules
+            position: fixed
+            top: 0
+            left: 0
+            z-index: -1
+            width: 100%
+            height: 100%
+            display: flex
+            align-items: center
+            justify-content: center
+            flex-direction: column
+            background: white
+            opacity: 0
+            transition: 1s cubic-bezier(1,0,0,1) all
+            h1
+                font-size: 2rem
+                font-weight: bold
+                color: hsl(229, 25%, 31%)
+                margin-top: 60px
+            img
+                display: block
+                width: 300px
+                object-fit: cover
+                margin: auto
+            .close
+                font-size: 2rem
+                font-weight: bold
+                color: hsl(217, 16%, 45%)
+                margin-bottom: 60px
+                opacity: 0.6
+                cursor: pointer
+                transition: .6s ease all
+                &:hover
+                    opacity: 1
+                    color: hsl(229, 25%, 31%)
+        .rules.active
+            z-index: 200
+            opacity: 1
+
+@media (min-width: 768px)
+    .game
+        .container
+            .score-box
+                width: 100%
+                max-width: 700px
+                h1
+                    font-size: 2rem
+                .score
+                    p
+                        font-size: 1.5rem
+                    span
+                        font-size: 2.5rem
+            .game-items
+                max-width: 500px
+                .box
+                    width: 160px
+                    height: 160px
+                    padding: 20px  
+                .paper
+                    top: -60px
+                    left: 0px
+                .rock
+                    top: -60px
+                    right: 0px
+                .sciss
+                    bottom: -60px
+                    left: 50%
+            .game-start
+                max-width: 700px
+                .selected-item
+                    .pick
+                        width: 160px
+                        height: 160px
+                    .winner.pick
+                        &::before
+                            top: -10px
+                            left: -10px
+                            width: 180px
+                            height: 180px
+                        &::after
+                            top: -30px
+                            left: -30px
+                            width: 220px
+                            height: 220px
+                    p
+                        font-size: 1.2rem
+                        margin-top: 80px
+            
+            .game-hints
+                .btn
+                    font-size: 1.5rem
+            .contain-btn-rules
+                .btn-rules
+                    font-size: 1.5rem
+            .rules
+                h1
+                    font-size: 2.5rem
+                    margin-top: 80px
+                img
+                    width: 400px
+                .close
+                    font-size: 2.5rem
+                    margin-bottom: 80px
+
+@media (min-width: 1000px)
+    .game
+        .container
+            .score-box
+                width: 100%
+                max-width: 900px
+                h1
+                    font-size: 2.5rem
+                    line-height: 40px
+                .score
+                    span
+                        font-size: 3rem
+            .game-items
+                .box
+                    width: 180px
+                    height: 180px
+                    padding: 25px  
+                .paper
+                    top: -80px
+                .rock
+                    top: -80px
+                .sciss
+                    bottom: -60px
+            .game-start
+                max-width: 900px
+                .selected-item
+                    .pick
+                        width: 180px
+                        height: 180px
+                    .winner.pick
+                        &::before
+                            top: -15px
+                            left: -15px
+                            width: 210px
+                            height: 210px
+                        &::after
+                            top: -30px
+                            left: -30px
+                            width: 240px
+                            height: 240px
+                    p
+                        font-size: 1.5rem
+            .rules
+                top: 55%
+                left: 50%
+                transform: translate(-50%, -50%)
+                padding: 25px
+                width: 450px
+                max-height: 500px
+                border-radius: 25px
+                flex-flow: row wrap
+                h1
+                    order: 1
+                    margin-top: 0
+                    margin-left: 0
+                    margin-right: auto
+                .close
+                    order: 2
+                    margin-right: 0
+                    margin-left: auto
+                    margin-bottom: 0
+                img
+                    order: 3
+                    width: 80%
+                    object-fit: contain
+                    margin-top: 50px
+
+// Animations
+@keyframes showLeft
+    0%
+        transform: translateX(100vw)
+    100%
+        transform: translate(0)
+
+@keyframes showHint
+    0%
+        transform: translateY(50px)
+    100%
+        transform: translate(0)
+
+@keyframes scale
+    0%
+        transform: scale(1)
+    100%
+        transform: scale(1.2)
+
+@keyframes bounce
+    0%
+        transform: translateY(0px)
+    100%
+        transform: translateY(-20px)
+
+@keyframes hide
+    0%
+        opacity: 0
+        transform: translateY(-50px)
+    100%
+        opacity: 1
+        transform: translateY(0px)
+
+@keyframes hide2
+    0%
+        opacity: 0
+        transform: translateY(50px)
+    100%
+        opacity: 1
+        transform: translateY(0px)
+
+@keyframes hide3
+    0%
+        opacity: 1
+    100%
+        opacity: 0
+
+@keyframes remove
+    0%
+        transform: translateX(0px) scale(1)
+    100%
+        transform: translateX(-100px) scale(0)
+        opacity: 0

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+</head>
+<body>
+
+  <div class="game">
+    <div class="main-animation">
+      <h1>Welcome to my game</h1>
+      <div class="loader">
+        <h2>Loading</h2>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="score-box">
+        <h1>Rock <br> Paper <br> Scissors</h1>
+        <div class="score">
+          <p>SCORE</p>
+          <span id="score"></span>
+        </div>
+      </div>
+
+      <div class="game-items" id="initial-screen">
+        <img src="assets/img/bg-triangle.svg" class="base">
+        <div class="box paper">
+          <img src="assets/img/icon-paper.svg" class="item">
+        </div>
+        <div class="box rock">
+          <img src="assets/img/icon-rock.svg" class="item">
+        </div>
+        <div class="box sciss">
+          <img src="assets/img/icon-scissors.svg" class="item">
+        </div>
+      </div>
+
+      <div class="game-start" id="game-screen">
+        <div class="selected-item">
+          <div class="pick">
+            <div class="box">
+              <img src="" id="player-pick">
+            </div>
+          </div>
+          <p>You Picked</p>
+        </div> 
+        <div class="selected-item">
+          <div class="pick">
+            <div class="box">
+              <img src="" id="house-pick">
+            </div>
+          </div>
+          <p>The House Picked</p>
+        </div> 
+      </div>
+      
+      <div class="game-hints" id="modal-hint">
+        <p class="hint" id="hint">You lose</p>
+        <span class="btn" id="play-again">Play again</span>
+      </div>
+
+      <div class="contain-btn-rules">
+        <span class="btn-rules" id="btn-rules">RULES</span>
+      </div>
+
+      <div class="rules" id="rules-modal">
+        <h1>RULES</h1>
+        <img src="assets/img/image-rules.svg">
+        <span class="close" id="rules-close">X</span>
+      </div>
+    </div>
+  </div>
+  
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
